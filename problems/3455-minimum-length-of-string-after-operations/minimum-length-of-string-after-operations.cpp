@@ -1,15 +1,15 @@
 class Solution {
 public:
     int minimumLength(string s) {
-        int ans=s.size();
-        unordered_map<char,int>mpp;
-        for(int i=0;i<s.size();i++){
-            mpp[s[i]]++;
-            if(mpp[s[i]] == 3){
-                ans-=2;
-                mpp[s[i]]=1;
+        unordered_map<char, int> count;
+        for (char c : s) count[c]++;
+        int minus = 0;
+        for (auto& entry : count) {
+            while (entry.second >= 3) {
+                minus += 2;
+                entry.second -= 2;
             }
         }
-        return ans;
+        return s.length() - minus;
     }
 };
